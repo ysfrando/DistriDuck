@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DistriDuck</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="app.js"></script>
 </head>
 <body>
+    <div class="header-background"></div>
     <div class="dashboard">
         <header>
             <h1>
@@ -28,8 +32,8 @@
         </header>
         <main>
             <div class="welcome-banner">
-                <h2>Network Dashboard</h2>
-                <p>Monitor your network activity in real-time</p>
+                <h2>DistriDuck Dashboard</h2>
+                <p>Monitor your network activity</p>
             </div>
             <div class="metrics-container">
                 <div class="metric-card" id="total-connections">
@@ -59,7 +63,7 @@
                             </svg>
                             <input type="text" id="search" placeholder="Search logs...">
                         </div>
-                        <button id="refresh-btn">
+                        <button id="refresh-btn" title="Refresh data">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M23 4V10H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M1 20V14H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -96,5 +100,7 @@
     </div>
     <!-- Add this just before the closing </body> tag -->
     <div id="loading-spinner" class="loading-spinner hidden"></div>
+    <button id="back-to-top" class="hidden" title="Back to top">↑</button>
 </body>
 </html>
+
