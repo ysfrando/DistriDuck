@@ -5,6 +5,9 @@ DistriDuck is a distributed intrusion detection and response system. It captures
 ## 🚀 Features
 
 - **Real-time Network Traffic Analysis**: Collect and analyze network packets to detect potential threats.
+
+![](https://github.com/yusufmunircloud/AWS-Projects/blob/main/img/Screenshot%202024-09-19%20at%207.00.09%20PM.png?raw=true)
+  
 - **Anomaly Detection**: Identify unusual patterns in network traffic.
 - **Data Visualization**: View detailed network data through an intuitive dashboard.
 
