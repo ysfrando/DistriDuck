@@ -61,17 +61,51 @@ document.addEventListener('DOMContentLoaded', () => {
     function createOrUpdateChart(data) {
         const ctx = document.getElementById('trafficChart').getContext('2d');
         
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+                duration: 1000,
+                easing: 'easeOutQuart'
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)'
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                    titleFont: {
+                        size: 14
+                    },
+                    bodyFont: {
+                        size: 12
+                    }
+                }
+            }
+        };
+
         if (chart) {
             chart.data = data.trafficData;
+            chart.options = chartOptions;
             chart.update();
         } else {
             chart = new Chart(ctx, {
                 type: 'line',
                 data: data.trafficData,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
+                options: chartOptions
             });
         }
     }
@@ -178,4 +212,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial load
     updateDashboard();
+
+    // Add this function
+    function smoothScroll(target) {
+        const element = document.querySelector(target);
+        window.scrollTo({
+            top: element.offsetTop,
+            behavior: 'smooth'
+        });
+    }
+
+    // Add this event listener
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = e.target.getAttribute('href');
+            smoothScroll(target);
+        });
+    });
+
+    // Add this function
+    function handleBackToTop() {
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // Call this function in the DOMContentLoaded event listener
+    handleBackToTop();
+
+    // Add this function
+    function handleHeaderScroll() {
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    }
+
+    // Call this function in the DOMContentLoaded event listener
+    handleHeaderScroll();
 });
