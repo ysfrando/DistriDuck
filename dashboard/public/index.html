@@ -3,50 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DistriDuck Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>DistriDuck</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="dashboard">
         <header>
-            <h1><i class="fas fa-duck"></i> DistriDuck</h1>
+            <h1>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                DistriDuck
+            </h1>
             <nav>
                 <a href="#" class="active">Dashboard</a>
-                <a href="#">Analytics</a>
                 <a href="#">Settings</a>
             </nav>
         </header>
         <main>
             <div class="welcome-banner">
-                <h2>Welcome to Your Network Dashboard</h2>
+                <h2>Network Dashboard</h2>
                 <p>Monitor your network activity in real-time</p>
             </div>
-            <div class="stats-container">
-                <div class="stat-card" id="total-connections">
-                    <i class="fas fa-network-wired"></i>
+            <div class="metrics-container">
+                <div class="metric-card" id="total-connections">
                     <h3>Total Connections</h3>
-                    <p>Loading...</p>
+                    <p class="metric-value">0</p>
                 </div>
-                <div class="stat-card" id="unique-ips">
-                    <i class="fas fa-fingerprint"></i>
+                <div class="metric-card" id="unique-ips">
                     <h3>Unique IPs</h3>
-                    <p>Loading...</p>
+                    <p class="metric-value">0</p>
                 </div>
-                <div class="stat-card" id="avg-packet-size">
-                    <i class="fas fa-box"></i>
+                <div class="metric-card" id="avg-packet-size">
                     <h3>Avg Packet Size</h3>
-                    <p>Loading...</p>
+                    <p class="metric-value">0 bytes</p>
                 </div>
             </div>
+            <div class="chart-container">
+                <canvas id="trafficChart"></canvas>
+            </div>
             <div class="data-container">
-                <h2>Network Data</h2>
+                <h2>Network Logs</h2>
                 <div class="table-controls">
-                    <input type="text" id="search" placeholder="Search...">
-                    <button id="refresh-btn"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    <div class="search-wrapper">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="text" id="search" placeholder="Search...">
+                    </div>
+                    <button id="refresh-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23 4V10H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M1 20V14H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M3.51 9C4.01717 7.56678 4.87913 6.2854 6.01547 5.27542C7.1518 4.26543 8.52547 3.55976 10.0083 3.22426C11.4911 2.88875 13.0348 2.93434 14.4952 3.35677C15.9556 3.77921 17.2853 4.56471 18.36 5.64L23 10M1 14L5.64 18.36C6.71475 19.4353 8.04437 20.2208 9.50481 20.6432C10.9652 21.0657 12.5089 21.1112 13.9917 20.7757C15.4745 20.4402 16.8482 19.7346 17.9845 18.7246C19.1209 17.7146 19.9828 16.4332 20.49 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Refresh
+                    </button>
                 </div>
                 <div id="dashboard-container">
-                    <!-- Dashboard content will be dynamically inserted here -->
+                    <!-- Network logs will be dynamically inserted here -->
+                </div>
+                <div class="pagination-controls">
+                    <button id="prev-page" disabled>Previous</button>
+                    <span id="page-info">Page 1 of 1</span>
+                    <button id="next-page" disabled>Next</button>
                 </div>
             </div>
         </main>
