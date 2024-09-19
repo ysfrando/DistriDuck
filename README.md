@@ -1,4 +1,4 @@
-# 🦆 DistriDuck Dashboard
+# 🦆 DistriDuck 
 
 DistriDuck is a distributed intrusion detection and response system. It captures network traffic, analyzes it for anomalies, and provides a user-friendly dashboard for monitoring. The goal is to make network security more accessible and manageable.
 
