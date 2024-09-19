@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+:root {
+    --primary-color: #FF5A5F;
+    --secondary-color: #00A699;
+    --background-color: #F7F7F7;
+    --text-color: #484848;
+    --light-gray: #767676;
+    --white: #FFFFFF;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color: var(--white);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+    color: var(--primary-color);
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav a:hover, nav a.active {
+    color: var(--primary-color);
+}
+
+main {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    padding: 2rem;
+}
+
+.welcome-banner {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.welcome-banner h2 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.welcome-banner p {
+    margin: 10px 0 0;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    flex: 1;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card i {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card h3 {
+    font-size: 1rem;
+    margin: 0;
+    color: var(--light-gray);
+}
+
+.stat-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0.5rem 0 0;
+    color: var(--text-color);
+}
+
+.data-container {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    padding: 1.5rem;
+}
+
+.data-container h2 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+#search {
+    padding: 0.5rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+#refresh-btn {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#refresh-btn:hover {
+    background-color: #008489;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1rem;
+}
+
+th, td {
+    border: none;
+    padding: 12px 8px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--background-color);
+    font-weight: bold;
+    color: var(--light-gray);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+tr:nth-child(even) {
+    background-color: var(--background-color);
+}
+
+tr:hover {
+    background-color: #f0f0f0;
+}
+
+td {
+    border-top: 1px solid #e4e4e4;
+}
+
+@media (max-width: 768px) {
+    .stats-container {
+        flex-direction: column;
+    }
+    
+    .stat-card {
+        margin: 10px 0;
+    }
+
+    .table-controls {
+        flex-direction: column;
+    }
+
+    #search, #refresh-btn {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.welcome-banner, .stat-card, .data-container {
+    animation: fadeIn 0.5s ease-out;
+}

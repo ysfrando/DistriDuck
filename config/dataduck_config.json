@@ -1,0 +1,7 @@
+{
+    "kafka_server": "localhost:9092",
+    "collection_interval": 30,
+    "log_level": "INFO",
+    "max_packet_count": 10
+}
+  
