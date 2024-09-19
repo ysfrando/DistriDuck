@@ -15,12 +15,14 @@ body {
     background-color: var(--background-color);
     margin: 0;
     padding: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f0f0f0' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2V6h4V4H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 .dashboard {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 40px 24px;
+    padding: 20px 24px 40px;
+    position: relative;
 }
 
 header {
@@ -28,6 +30,31 @@ header {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 40px;
+    padding: 20px 40px;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+header.scrolled {
+    padding: 15px 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 16px 16px;
+}
+
+/* Add this new style */
+.header-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px; /* Adjust this value to match your header's height */
+    background-color: white;
+    z-index: 999;
 }
 
 h1 {
@@ -41,6 +68,7 @@ h1 {
 
 h1 svg {
     margin-right: 12px;
+    animation: float 3s ease-in-out infinite;
 }
 
 nav a {
@@ -62,18 +90,19 @@ nav a:hover, nav a.active {
     padding: 32px;
     margin-bottom: 32px;
     box-shadow: var(--shadow);
+    background-image: linear-gradient(135deg, #ff385c 0%, #ff5a5f 100%);
+    color: white;
 }
 
 .welcome-banner h2 {
-    color: var(--text-color);
-    font-size: 24px;
-    margin: 0 0 12px 0;
+    color: white;
+    font-size: 28px;
+    margin-bottom: 8px;
 }
 
 .welcome-banner p {
-    margin: 0;
-    color: #717171;
-    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 18px;
 }
 
 .metrics-container {
@@ -88,9 +117,11 @@ nav a:hover, nav a.active {
     border-radius: 16px;
     padding: 24px;
     box-shadow: var(--shadow);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
 }
 
 .metric-card::after {
@@ -106,19 +137,28 @@ nav a:hover, nav a.active {
 
 .metric-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    animation: pulse 2s infinite;
 }
 
 .metric-card h3 {
     color: var(--text-color);
-    font-size: 18px;
-    margin: 0 0 12px 0;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
 }
 
 .metric-value {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 700;
     color: var(--primary-color);
     margin: 0;
+    transition: color 0.3s ease;
+}
+
+.metric-card:hover .metric-value {
+    color: #ff7e82;
 }
 
 .chart-container {
@@ -128,6 +168,7 @@ nav a:hover, nav a.active {
     margin-bottom: 32px;
     box-shadow: var(--shadow);
     position: relative;
+    border: 1px solid #e0e0e0;
 }
 
 .chart-container::before {
@@ -147,6 +188,7 @@ nav a:hover, nav a.active {
     border-radius: 16px;
     padding: 32px;
     box-shadow: var(--shadow);
+    border: 1px solid #e0e0e0;
 }
 
 .data-header {
@@ -205,10 +247,14 @@ nav a:hover, nav a.active {
     align-items: center;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    background-image: linear-gradient(to right, #ff385c, #ff5a5f);
+    transition: all 0.3s ease;
 }
 
 #refresh-btn:hover {
-    background-color: #FF7E82;
+    background-image: linear-gradient(to right, #ff5a5f, #ff385c);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 #refresh-btn svg {
@@ -218,6 +264,10 @@ nav a:hover, nav a.active {
 .logs-table {
     margin-bottom: 24px;
     overflow-x: auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
 }
 
 .logs-table table {
@@ -234,12 +284,17 @@ nav a:hover, nav a.active {
 }
 
 .logs-table th {
-    background-color: #f8f8f8;
+    background-color: #f7f7f7;
     font-weight: 600;
-    color: #484848;
     text-transform: uppercase;
-    font-size: 14px;
     letter-spacing: 0.5px;
+    font-size: 12px;
+    color: #717171;
+    transition: background-color 0.3s ease;
+}
+
+.logs-table th:hover {
+    background-color: #e8e8e8;
 }
 
 .logs-table tr:last-child td {
@@ -247,16 +302,18 @@ nav a:hover, nav a.active {
 }
 
 .logs-table tbody tr {
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
     animation: fadeInRow 0.5s ease-out;
 }
 
 .logs-table tbody tr:hover {
     background-color: #f8f8f8;
+    transform: translateY(-2px);
 }
 
 .logs-table td {
     font-size: 14px;
+    color: #484848;
 }
 
 .status-badge {
@@ -300,10 +357,14 @@ nav a:hover, nav a.active {
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    background-image: linear-gradient(to right, #ff385c, #ff5a5f);
+    transition: all 0.3s ease;
 }
 
 .pagination-controls button:hover {
-    background-color: #FF7E82;
+    background-image: linear-gradient(to right, #ff5a5f, #ff385c);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .pagination-controls button:disabled {
@@ -370,10 +431,10 @@ nav a:hover, nav a.active {
     transform: translate(-50%, -50%);
     width: 50px;
     height: 50px;
-    border: 3px solid rgba(0, 0, 0, 0.1);
+    border: 3px solid rgba(255, 56, 92, 0.3);
     border-radius: 50%;
     border-top: 3px solid var(--primary-color);
-    animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite, fadeIn 0.5s ease-out;
 }
 
 .hidden {
@@ -391,3 +452,70 @@ nav a:hover, nav a.active {
     to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+}
+
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+#back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#back-to-top:hover {
+    background-color: #ff7e82;
+}
+
+button, input[type="text"] {
+    font-family: 'Nunito', sans-serif;
+}
+
+#refresh-btn, .pagination-controls button {
+    background-image: linear-gradient(to right, #ff385c, #ff5a5f);
+    transition: all 0.3s ease;
+}
+
+#refresh-btn:hover, .pagination-controls button:hover {
+    background-image: linear-gradient(to right, #ff5a5f, #ff385c);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#search {
+    border: 1px solid #e0e0e0;
+    border-radius: 24px;
+    padding: 8px 16px;
+    font-size: 14px;
+    width: 240px;
+    transition: all 0.3s ease;
+}
+
+#search:focus {
+    border-color: #ff385c;
+    box-shadow: 0 0 0 2px rgba(255, 56, 92, 0.2);
+    outline: none;
+}
